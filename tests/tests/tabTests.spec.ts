@@ -4,10 +4,8 @@ test.describe('Work with tabs and windows', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('https://demo-qa-app.azurewebsites.net/browser-windows');
   });
-  Х
-  test(
-    'Work with tan', 
-    async ({ page, context }) => {
+
+  test('Work with tan', async ({ page, context }) => {
     const newTabButton = page.locator("//button[@id = 'tabButton']");
     // const textOntheNewPage = page.locator("//h1[@id = 'sampleHeading']");
 
