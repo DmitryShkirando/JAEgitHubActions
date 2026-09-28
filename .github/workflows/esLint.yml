@@ -1,15 +1,31 @@
-name: My first test work
+name: ES Lint test
 
 on:
-  push:
-    branches: [main, master]
-  # pull_request:
-  #   branches: [main, master]
-  # Позволяет запускать тесты вручную из вкладки Actions на GitHub
   workflow_dispatch:
 
 jobs:
+  linting:
+    name: Run ESLint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Чекaут репозитория
+        uses: actions/checkout@v4
+
+      - name: Установка Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+
+      - name: Установка зависимостей
+        run: npm ci
+
+      - name: Запуск ESLint
+        run: npm run lint
+
   testing:
+    name: Run Playwright Tests
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
@@ -21,7 +37,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          # Включаем кэширование npm-пакетов для ускорения запусков
           cache: 'npm'
 
       - name: Установка зависимостей
@@ -33,7 +48,6 @@ jobs:
       - name: Запуск тестов Playwright
         run: npx playwright test
 
-      # Сохраняем HTML-отчет как артефакт (доступен для скачивания в GitHub после прогона)
       - name: Загрузка HTML-отчета
         uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
