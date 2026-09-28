@@ -9,7 +9,7 @@ jobs:
 
       steps:
         - name: Creation a file
-          run: echo "Test text" testFile.txt
+          run: echo "Test text">testFile.txt
         - name: Check
           run: cat testFile.txt
     checking-file:
