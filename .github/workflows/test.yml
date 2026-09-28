@@ -16,7 +16,7 @@ jobs:
           uses: actions/upload-artifact@v7
           with:
             name: myArti
-            path: path/to/arti
+            path: testFile.txt
     checking-file:
       runs-on: ubuntu-latest
       
@@ -26,7 +26,7 @@ jobs:
           uses: actions/download-artifact@v8
           with:
             name: myArti
-            path: path/to/arti
+            path: testFile.txt
         - name: View of file
           run: cat testFile.txt
 
