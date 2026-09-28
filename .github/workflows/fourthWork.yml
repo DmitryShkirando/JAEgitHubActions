@@ -2,13 +2,19 @@ name: Fourth Workflow
 
 on:
   workflow_run:
-    workflows: [My first test work]
+    workflows: [Third Workflow]
     types:
       - completed
 
 jobs:
-  hello-command:
+  success-command:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: List Files
-        run: echo "Hello"
+      - run: echo "Success"
+
+  failure-command:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo "Faild"
