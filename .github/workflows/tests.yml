@@ -3,9 +3,6 @@ name: My first test work
 on:
   push:
     branches: [main, master]
-  # pull_request:
-  #   branches: [main, master]
-  # Позволяет запускать тесты вручную из вкладки Actions на GitHub
   workflow_dispatch:
 
 jobs:
@@ -21,7 +18,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          # Включаем кэширование npm-пакетов для ускорения запусков
           cache: 'npm'
 
       - name: Установка зависимостей
@@ -33,7 +29,6 @@ jobs:
       - name: Запуск тестов Playwright
         run: npx playwright test
 
-      # Сохраняем HTML-отчет как артефакт (доступен для скачивания в GitHub после прогона)
       - name: Загрузка HTML-отчета
         uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
