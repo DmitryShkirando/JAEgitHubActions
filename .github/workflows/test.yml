@@ -13,14 +13,14 @@ jobs:
         - name: Check
           run: cat testFile.txt
         - name: Upload
-          uses: actions/cache@v6
+          uses: actions/upload-artifact@v7
     checking-file:
       runs-on: ubuntu-latest
       
       needs: creation-text-file
       steps:
         - name: Download
-          uses: actions/download@v6
+          uses: actions/download-artifact@v8
         - name: View of file
           run: cat testFile.txt
 
